@@ -89,6 +89,16 @@ Basta acessar no navegador após iniciar o projeto, explorar os endpoints e test
 
 ---
 
-### 🚀 Este projeto foi criado com foco em aprendizagem acelerada, conhecimento de boas práticas e preocupação com manutenção e escalabilidade. Ideal para mostrar habilidades técnicas em processos seletivos.
+## 📄 License
+Define the project license here (e.g., MIT).  
+If you don't have one yet, you can add a `LICENSE` file.
+
+---
+
+### 📌 Author
+**VINICIUS0098876**  
+Repository: https://github.com/VINICIUS0098876/CoreWallet-API.git
+ 
+
 
 

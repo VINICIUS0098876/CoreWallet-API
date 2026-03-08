@@ -1,4 +1,4 @@
-# 💼 CoreWallet API
+# 💼 CoreWallet API - Em Manutenção!
 
 Uma API RESTful de carteira digital e simulador de transações financeiras instantâneas (inspirado no Pix), robusta, segura e preparada para produção. Projeto desenvolvido para demonstrar domínio técnico do stack Node.js, TypeScript, Express e integrações modernas, com foco em qualidade e boas práticas.
 
@@ -90,4 +90,5 @@ Basta acessar no navegador após iniciar o projeto, explorar os endpoints e test
 ---
 
 ### 🚀 Este projeto foi criado com foco em aprendizagem acelerada, conhecimento de boas práticas e preocupação com manutenção e escalabilidade. Ideal para mostrar habilidades técnicas em processos seletivos.
+
 

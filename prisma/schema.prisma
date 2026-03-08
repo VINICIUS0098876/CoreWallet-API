@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  
+}
+
+model transictions {
+  id_transiction                                      Int       @id @default(autoincrement())
+  value_transiction                                   Decimal   @db.Decimal(10, 2)
+  date_time                                           DateTime? @default(now()) @db.DateTime(0)
+  id_wallet_origin                                    Int
+  id_wallet_destination                               Int
+  wallets_transictions_id_wallet_originTowallets      wallets   @relation("transictions_id_wallet_originTowallets", fields: [id_wallet_origin], references: [id_wallet], onDelete: NoAction, onUpdate: NoAction, map: "transictions_ibfk_1")
+  wallets_transictions_id_wallet_destinationTowallets wallets   @relation("transictions_id_wallet_destinationTowallets", fields: [id_wallet_destination], references: [id_wallet], onDelete: NoAction, onUpdate: NoAction, map: "transictions_ibfk_2")
+
+  @@index([id_wallet_destination], map: "id_wallet_destination")
+  @@index([id_wallet_origin], map: "id_wallet_origin")
+}
+
+model users {
+  id_user       Int      @id @default(autoincrement())
+  name_user     String   @db.VarChar(255)
+  cpf           String   @unique(map: "cpf") @db.VarChar(11)
+  email         String   @unique(map: "email") @db.VarChar(255)
+  password_user String   @db.VarChar(255)
+  wallets       wallets?
+}
+
+model wallets {
+  id_wallet                                                Int            @id @default(autoincrement())
+  id_user                                                  Int            @unique(map: "id_user")
+  balance                                                  Decimal?       @default(0.00) @db.Decimal(10, 2)
+  transictions_transictions_id_wallet_originTowallets      transictions[] @relation("transictions_id_wallet_originTowallets")
+  transictions_transictions_id_wallet_destinationTowallets transictions[] @relation("transictions_id_wallet_destinationTowallets")
+  users                                                    users          @relation(fields: [id_user], references: [id_user], onDelete: NoAction, onUpdate: NoAction, map: "wallets_ibfk_1")
+}

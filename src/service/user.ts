@@ -149,6 +149,15 @@ export class DeleteUserService {
                 throw new AppError(400, 'Operação negada: A conta ainda possui saldo e não pode ser encerrada.')
             }
 
+            await tx.transictions.deleteMany({
+                where:{
+                    OR: [
+                        { id_wallet_origin: wallet.id_wallet },
+                        { id_wallet_destination: wallet.id_wallet }
+                    ]
+                }
+            })
+
             await tx.wallets.delete({
                 where: { id_user: id_user }
             })

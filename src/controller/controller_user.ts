@@ -139,7 +139,7 @@ export class UpdateUserController {
 export class DeleteUserController {
   async handle(req: AuthRequest, res: Response) {
     try {
-      const { id } = req.params;
+      const  id  = req.userId;
 
       if (!id) {
         return res.status(400).json({ message: ERROR_INVALID_ID });

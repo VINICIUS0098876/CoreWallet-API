@@ -40,10 +40,19 @@ export class CreateTransictionController{
 
 export class GetExtractController{
     async handle(req: AuthRequest, res: Response){
-        const id_user = Number(req.userId);
+        try {
+            const id_user = Number(req.userId);
 
         const extract = await getExtractTransictionService.execute(id_user);
 
         return res.status(200).json({message: SUCCESS_GET_ITEM, data: extract});
+        } catch (error) {
+            if (error instanceof AppError) {
+                return res.status(error.statusCode).json({ message: error.message });
+            }
+            console.error("Erro ao buscar extrato:", error);
+            return res.status(500).json({ message: ERROR_INTERNAL_SERVER });
+        }
+        
     }
 }

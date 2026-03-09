@@ -8,6 +8,14 @@ import {
   DeleteUserController,
   LoginUserController,
 } from "./controller/controller_user";
+import {
+  DepositWalletController,
+  FindWalletByIdController,
+} from "./controller/controller_wallet";
+import {
+  CreateTransictionController,
+  GetExtractController,
+} from "./controller/constroller_transiction";
 const router = Router();
 
 // USER CONTROLLER
@@ -21,10 +29,14 @@ const loginUserController = new LoginUserController();
 /* =================================================================================== */
 
 // WALLET CONTROLLER
+const findWalletByIdController = new FindWalletByIdController();
+const depositWalletController = new DepositWalletController();
 
 /* =================================================================================== */
 
 //  TRANSICTION CONTROLLER
+const createTransictionController = new CreateTransictionController();
+const getExtractTransictionController = new GetExtractController();
 
 /* =================================================================================== */
 
@@ -199,8 +211,123 @@ router.post("/login", (req: Request, res: Response) =>
   loginUserController.handle(req, res),
 );
 
-// ROUTES WALLETS 
+// ROUTES WALLETS
+
+/**
+ * @swagger
+ * /wallets/{id_wallet}:
+ *   get:
+ *     summary: Busca carteira por ID
+ *     tags:
+ *       - Carteiras
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id_wallet
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Carteira encontrada
+ *       404:
+ *         description: Carteira não encontrada
+ */
+router.get(
+  "/wallets/:id_wallet",
+  authMiddleware,
+  (req: Request, res: Response) => findWalletByIdController.handle(req, res),
+);
+
+/**
+ * @swagger
+ * /wallets/{id_user}/deposit:
+ *   post:
+ *     summary: Deposita valor na carteira de um usuário
+ *     tags:
+ *       - Carteiras
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id_user
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               amount:
+ *                 type: number
+ *     responses:
+ *       200:
+ *         description: Depósito realizado com sucesso
+ *       400:
+ *         description: Erro no depósito
+ */
+router.post(
+  "/wallets/:id_user/deposit",
+  authMiddleware,
+  (req: Request, res: Response) => depositWalletController.handle(req, res),
+);
 
 // ROUTES TRANSICTIONS
+
+/**
+ * @swagger
+ * /transictions:
+ *   post:
+ *     summary: Realiza uma transação entre carteiras
+ *     tags:
+ *       - Transações
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id_wallet_destination:
+ *                 type: integer
+ *               value_transiction:
+ *                 type: number
+ *     responses:
+ *       201:
+ *         description: Transação realizada com sucesso
+ *       400:
+ *         description: Erro na transação
+ */
+router.post("/transictions", authMiddleware, (req: Request, res: Response) =>
+  createTransictionController.handle(req, res),
+);
+
+/**
+ * @swagger
+ * /transictions/extract:
+ *   get:
+ *     summary: Retorna o extrato das transações da carteira do usuário autenticado
+ *     tags:
+ *       - Transações
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de transações
+ *       401:
+ *         description: Não autorizado
+ */
+router.get(
+  "/transictions/extract",
+  authMiddleware,
+  (req: Request, res: Response) =>
+    getExtractTransictionController.handle(req, res),
+);
 
 export default router;

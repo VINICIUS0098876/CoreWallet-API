@@ -18,6 +18,8 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm install
+      - name: Forçar Instalação do Motor do Prisma
+        run: npm install @prisma/client
       - name: Generate Prisma Client
         run: npx prisma generate
       - name: Run tests Automatically

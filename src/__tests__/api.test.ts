@@ -1,3 +1,11 @@
+jest.mock('../prisma/index', () => ({
+  __esModule: true,
+  default: {
+    $connect: jest.fn(),
+    user: { findMany: jest.fn().mockResolvedValue([]) }
+  }
+}), { virtual: true });
+
 import request from "supertest";
 import { describe, it, expect } from "@jest/globals";
 import { app } from "../server";

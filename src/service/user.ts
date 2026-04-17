@@ -73,7 +73,7 @@ export class FindAllUsersService{
         }
 
         // Ao retornar a lista de usuários, excluímos a senha de cada um para garantir a segurança dos dados
-        return users.map(user => excludePassword(user))
+        return users.map((user: any) => excludePassword(user))
     }
 }
 
@@ -136,7 +136,7 @@ export class DeleteUserService {
         }
 
         // Transação Interativa - Aqui fazemos uma condição dentro de $transiction para verificar se a carteira associada ao usuário possui saldo antes de permitir a exclusão do usuário e da carteira. Se a carteira tiver saldo, a operação é negada e uma mensagem de erro é retornada.
-        await prismaClient.$transaction(async (tx) => {
+        await prismaClient.$transaction(async (tx: any) => {
             const wallet = await tx.wallets.findFirst({
                 where: { id_user}
             })

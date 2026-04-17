@@ -18,6 +18,8 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm install
+      - name: Generate Prisma Client
+        run: npx prisma generate
       - name: Run tests Automatically
         run: npx jest
     env:

@@ -1,6 +1,6 @@
 import prismaClient from "../prisma/index";
 import { AppError } from "../errors/AppError";
-import { Prisma } from "../generated/prisma/browser";
+import { Prisma } from "@prisma/client";
 
 
 interface SafeUser {

@@ -5,6 +5,7 @@ import { TokenJwt } from "../middleware/JWTMiddleware";
 import { CreateUserInput, UpdateUserInput} from "../schemas/userSchema";
 import { AppError } from "../errors/AppError";
 import prisma from "../prisma/index";
+import { Prisma } from "@prisma/client";
 
 interface SafeUser {
   id_user: number;

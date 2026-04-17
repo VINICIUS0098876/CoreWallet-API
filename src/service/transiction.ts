@@ -1,6 +1,7 @@
 import prismaClient from "../prisma/index";
 import { AppError } from "../errors/AppError";
-import { Prisma } from "../generated/prisma/client";
+import { Prisma } from "@prisma/client";
+
 
 export class CreateTransactionService{
     async execute(id_user: number, id_wallet_destination: number, value_transiction: number){

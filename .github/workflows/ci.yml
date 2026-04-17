@@ -3,7 +3,7 @@ name: CoreWallet API CI
 on:
   push:
     branches: [main, master]
-  pulll_request:
+  pull_request:
     branches: [main, master]
 
 jobs:

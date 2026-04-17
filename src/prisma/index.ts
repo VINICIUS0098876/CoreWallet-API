@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client"; // Mudamos para o import padrão
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
-import mariadb from "mariadb";
+import * as mariadb from "mariadb";
 
 // 1. Criamos a piscina de conexões (Obrigatorio no Prisma 7)
 const pool = mariadb.createPool(process.env.DATABASE_URL!);

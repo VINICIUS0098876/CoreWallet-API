@@ -10,5 +10,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*", "src/__tests__/**/*"]
+  "include": ["src/**/*", "src/__tests__/**/*","src/prisma.config.ts"]
 }

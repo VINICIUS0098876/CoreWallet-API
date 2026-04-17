@@ -1,11 +1,11 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../node_modules/.prisma/client"
+  provider = "prisma-client-js"
+  // Removi o output manual para evitar aqueles erros de cópia do Windows
 }
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  // REMOVI a linha url = env(...) conforme o erro pediu
 }
 
 model transictions {

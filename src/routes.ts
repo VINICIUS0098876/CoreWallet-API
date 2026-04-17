@@ -179,7 +179,7 @@ router.put("/users/:id", authMiddleware, (req: Request, res: Response) =>
  *       404:
  *         description: Usuário não encontrado
  */
-router.delete("/users/delete", authMiddleware, (req: Request, res: Response) =>
+router.delete("/users/:id_user", authMiddleware, (req: Request, res: Response) =>
   deleteUserController.handle(req, res),
 );
 

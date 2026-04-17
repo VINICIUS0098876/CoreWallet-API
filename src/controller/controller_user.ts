@@ -139,13 +139,13 @@ export class UpdateUserController {
 export class DeleteUserController {
   async handle(req: AuthRequest, res: Response) {
     try {
-      const  id  = req.userId;
+      const  id_user  = req.params.id_user;
 
-      if (!id) {
+      if (!id_user) {
         return res.status(400).json({ message: ERROR_INVALID_ID });
       }
 
-      const deleteUser = await deleteUserService.execute(Number(id));
+      const deleteUser = await deleteUserService.execute(Number(id_user));
 
       return res
         .status(200)

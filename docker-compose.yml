@@ -1,0 +1,26 @@
+
+services:
+    api:
+        build: .
+        ports:
+        - "3000:3000"
+        environment:
+        - DATABASE_URL=mysql://root:bcd127@localhost:3306/corewallet_db
+        - JWT_SECRET=wallet_api_secret
+        depends_on:
+        - db
+
+    db:
+        image: mysql:8.0
+        environment:
+        - MYSQL_ROOT_PASSWORD=bcd127
+        - MYSQL_DATABASE=corewallet_db
+        - MYSQL_USER=root
+        - MYSQL_PASSWORD=bcd127
+        ports:
+        - "3306:3306"
+        volumes:
+        - mysql_data:/var/lib/mysql
+
+volumes:
+    mysql_data: {}

@@ -39,9 +39,15 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use(router);
 
+// Aqui só irá iniciar o servidor se nao estiver em ambiante de teste.
+if(process.env.NODE_ENV !== "test"){
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(
     `Swagger documentation available at http://localhost:${PORT}/api-docs`,
   );
 });
+}
+
+
+export {app};
